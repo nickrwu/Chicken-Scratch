@@ -21,11 +21,25 @@ function App() {
     console.log(res.data.choices[0].text);
   }
   return (
+    <div className="App">
+      <header className="App-header">
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
 
     <div>
       <input onChange={(e) => setPrompt(e.target.value)}></input>
       <button onClick={getQuestions}>Hi</button>
-
     </div>
   );
 }
