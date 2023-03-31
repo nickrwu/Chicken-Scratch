@@ -3,10 +3,12 @@ import './App.css';
 import { Configuration, OpenAIApi } from "openai";
 function App() {
   const [prompt, setPrompt] = useState("");
-  const configuration = new Configuration({
-    apiKey: "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",
-  });
+  const [result, setResult] = useState("");
 
+  const configuration = new Configuration({
+    apiKey: process.env.REACT_APP_OPENAI,
+  });
+  let answerArray = []
   const openai = new OpenAIApi(configuration);
   const getQuestions = async () => {
     const res = await openai.createCompletion({
@@ -19,12 +21,33 @@ function App() {
       presence_penalty: 0.0,
     });
     console.log(res.data.choices[0].text);
+
+    answerArray = res.data.choices[0].text.split("\n");
+    answerArray.shift();
+    answerArray.shift();
+    setResult(answerArray);
+
+    /*
+       
+    */
+
   }
+
+
+
+
   return (
 
     <div>
-      <input onChange={(e) => setPrompt(e.target.value)}></input>
+      <input placeholder="Get questions for your exam!" onChange={(e) => setPrompt(e.target.value)}></input>
       <button onClick={getQuestions}>Hi</button>
+      {result.length > 0 ? <ul>
+        {result.map((str, index) => (
+          <li key={index}>{str}</li>
+        ))}
+      </ul> : <></>}
+
+
 
     </div>
   );
