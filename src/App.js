@@ -5,9 +5,13 @@ function App() {
   const [prompt, setPrompt] = useState("");
   const [result, setResult] = useState("");
 
+  console.log(process.env.REACT_APP_OPENAI);
+  // console.log("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");
+
   const configuration = new Configuration({
     apiKey: process.env.REACT_APP_OPENAI,
   });
+  console.log(configuration);
   let answerArray = []
   const openai = new OpenAIApi(configuration);
   const getQuestions = async () => {
